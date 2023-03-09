@@ -9,11 +9,10 @@ api for bcs learning app for preparing for the bcs exam. The project contains th
 
 ## Steps
 * Create the Application database in MongoDb
-* Add the following configuration to the appsettings.json file
+* Add the following configuration to the appsettings.Development.json file
 
 ```
 "BcsStoreDbSettings":{
-    "ModuleTopicsCollectionName":"moduletopics",
     "ConnectionString":"<your-connection-string>",
     "DatabaseName":"<your-database-name>"
   }
