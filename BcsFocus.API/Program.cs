@@ -1,21 +1,15 @@
-using BcsFocus.API.Models;
 using BcsFocus.API.Services;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.Configure<BcsStoreDbSettings>(
-    builder.Configuration.GetSection(nameof(BcsStoreDbSettings))
-);
-
-builder.Services.AddSingleton<IBcsStoreDbSettings>(
-    sp => sp.GetRequiredService<IOptions<BcsStoreDbSettings>>().Value
-);
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables()
+    .Build();
 
 builder.Services.AddSingleton<IMongoClient>(
-    s => new MongoClient(builder.Configuration.GetValue<string>("BcsStoreDbSettings:ConnectionString"))
+    s => new MongoClient(configuration["BcsStoreDbSettings:ConnectionString"])
 );
 
 builder.Services.AddScoped<IModuleService, ModuleService>();

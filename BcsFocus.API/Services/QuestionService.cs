@@ -5,10 +5,12 @@ namespace BcsFocus.API.Services
 {
     public class QuestionService : IQuestionService{
         private readonly IMongoCollection<Question> _questions;
+        private readonly IConfiguration _configuration;
 
-        public QuestionService(IBcsStoreDbSettings settings, IMongoClient mongoClient){
-            var database = mongoClient.GetDatabase(settings.DatabaseName);
-            _questions = database.GetCollection<Question>(settings.QuestionPointsCollectionName);
+        public QuestionService(IConfiguration configuration, IMongoClient mongoClient){
+            _configuration = configuration;
+            var database = mongoClient.GetDatabase(_configuration["BcsStoreDbSettings:DatabaseName"]);
+            _questions = database.GetCollection<Question>("questionpoints");
         }
 
         List<Question> IQuestionService.Get()

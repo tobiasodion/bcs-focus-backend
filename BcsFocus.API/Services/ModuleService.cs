@@ -5,10 +5,12 @@ namespace BcsFocus.API.Services
 {
     public class ModuleService : IModuleService{
         private readonly IMongoCollection<Module> _modules;
+        private readonly IConfiguration _configuration;
 
-        public ModuleService(IBcsStoreDbSettings settings, IMongoClient mongoClient){
-            var database = mongoClient.GetDatabase(settings.DatabaseName);
-            _modules = database.GetCollection<Module>(settings.ModuleTopicsCollectionName);
+        public ModuleService(IConfiguration configuration, IMongoClient mongoClient){
+            _configuration = configuration;
+            var database = mongoClient.GetDatabase(_configuration["BcsStoreDbSettings:DatabaseName"]);
+            _modules = database.GetCollection<Module>("moduletopics");
         }
 
         List<Module> IModuleService.Get()
