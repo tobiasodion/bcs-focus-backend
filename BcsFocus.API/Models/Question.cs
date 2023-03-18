@@ -30,7 +30,7 @@ namespace BcsFocus.API.Models
         public DateTime ModifyDate { get; set; }
 
         [BsonElement("topics")]
-        public int[]? Topics { get; set; }
+        public string[]? Topics { get; set; }
 
         [BsonElement("questionPoints")]
         public List<QuestionPoint>? QuestionPoints { get; set; }
@@ -76,10 +76,17 @@ namespace BcsFocus.API.Models
 
         [BsonElement("date")]
         public DateTime Date { get; set; }
+
+        [BsonElement("type")]
+        public string Type { get; set; } = String.Empty;
     }
 
     public class QuestionPoint
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
+
         [BsonElement("questionDefinitions")]
         public string[]? QuestionDefinitions { get; set; }
 
@@ -97,11 +104,5 @@ namespace BcsFocus.API.Models
 
         [BsonElement("subPoints")]
         public string[]? SubPoints { get; set; }
-
-        [BsonElement("uploadDate")]
-        public DateTime UploadDate { get; set; }
-
-        [BsonElement("modifyDate")]
-        public DateTime ModifyDate { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BcsFocus.API.Models
 {
-    public class Module
+    public class Topic
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -11,14 +11,5 @@ namespace BcsFocus.API.Models
 
         [BsonElement("title")]
         public string Title { get; set; } = String.Empty;
-
-        [BsonElement("description")]
-        public string Description { get; set; } = String.Empty;
-
-        [BsonElement("topics")]
-        public string[]? Topics { get; set; }
-
-        [BsonElement("questions")]
-        public string[]? Questions { get; set; }
     }
 }
