@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BcsFocus.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/topics")]
 public class TopicController : ControllerBase
 {
     private readonly ILogger<TopicController> _logger;
