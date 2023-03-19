@@ -14,6 +14,16 @@ namespace BcsFocus.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
             services.AddSingleton<IMongoClient>(
                 s => new MongoClient(Configuration["BcsStoreDbSettings:ConnectionString"])
             );
@@ -30,6 +40,7 @@ namespace BcsFocus.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("AllowAll");
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {

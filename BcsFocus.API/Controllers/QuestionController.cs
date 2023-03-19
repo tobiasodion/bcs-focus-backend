@@ -1,5 +1,4 @@
 using AutoMapper;
-using BcsFocus.API.DTO;
 using BcsFocus.API.Models;
 using BcsFocus.API.Services;
 using Microsoft.AspNetCore.Mvc;
