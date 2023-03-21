@@ -88,12 +88,16 @@ namespace BcsFocus.API.Services
 
         public Question Create(Question question)
         {
+            question.SubParts = question.QuestionPoints != null ? question.QuestionPoints.Count() : 0;
+           
             _questions.InsertOne(question);
             return question;
         }
 
         public void Update(string id, Question question)
         {
+            question.SubParts = question.QuestionPoints != null ? question.QuestionPoints.Count() : 0;
+
             _questions.ReplaceOne(question => question.Id == id, question);
         }
 

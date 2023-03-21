@@ -3,11 +3,11 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BcsFocus.API.Models
 {
-    public class Question
+    public class QuestionPoint
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = String.Empty;
+        public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
 
         [BsonElement("questionDefinitions")]
         public string[]? QuestionDefinitions { get; set; }
@@ -19,24 +19,17 @@ namespace BcsFocus.API.Models
         public Figure? Figure { get; set; }
 
         [BsonElement("meta")]
-        public MetaQuestion? Meta { get; set; }
+        public MetaQuestionPoint? Meta { get; set; }
 
-        [BsonElement("subParts")]
-        public int SubParts { get; set; }
+        [BsonElement("mark")]
+        public int Mark { get; set; }
 
+        [BsonElement("subPoints")]
+        public List<SubPoint>? SubPoints { get; set; }
         [BsonElement("uploadDate")]
         public DateTime UploadDate { get; set; }
 
         [BsonElement("modifyDate")]
         public DateTime ModifyDate { get; set; }
-
-        [BsonElement("topics")]
-        public string[]? Topics { get; set; }
-
-        [BsonElement("questionPoints")]
-        public List<QuestionPoint>? QuestionPoints { get; set; }
-
-        [BsonElement("answer")]
-        public Answer? Answer { get; set; }
     }
 }

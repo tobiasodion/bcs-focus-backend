@@ -15,6 +15,12 @@ namespace BcsFocus.API.Models
         [BsonElement("description")]
         public string Description { get; set; } = String.Empty;
 
+        [BsonElement("createdDate")]
+        public string CreatedDate { get; set; } = String.Empty;
+
+        [BsonElement("modifyDate")]
+        public string ModifyDate { get; set; } = String.Empty;
+
         [BsonElement("topics")]
         public string[]? Topics { get; set; }
 

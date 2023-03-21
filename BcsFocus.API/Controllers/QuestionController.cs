@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using BcsFocus.API.Models;
 using BcsFocus.API.Services;
@@ -21,23 +22,33 @@ public class QuestionController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Question>>> Get([FromQuery] int p=1, 
-                                                   [FromQuery] int limit=10, 
-                                                   [FromQuery] bool f=true, 
-                                                   [FromQuery] string? t=null)
+    public async Task<ActionResult<IEnumerable<Question>>> Get([FromQuery] int p = 1,
+                                                   [FromQuery] int limit = 10,
+                                                   [FromQuery] bool f = true,
+                                                   [FromQuery] string? t = null)
     {
-        var questions = await _questionService.GetAll(t,p,limit,f);
+        var questions = await _questionService.GetAll(t, p, limit, f);
         return Ok(questions);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Question>> Get(string id, [FromQuery] string? f = null)
+    public async Task<ActionResult<Question>> Get(string id, [FromQuery] string? fid = null)
     {
+        if(id.Length != 24)
+        {
+            return NotFound($"Question with Id = {id} not found");
+        }
+
+        if (fid != null && fid.Length != 24)
+        {
+            return NotFound($"Question with QuestionPointId = {fid} not found");
+        }
+
         Question question;
 
-        if (f != null)
+        if (fid != null)
         {
-            question = await _questionService.GetQuestionPoint(id, f);
+            question = await _questionService.GetQuestionPoint(id, fid);
         }
         else
         {
@@ -47,7 +58,7 @@ public class QuestionController : ControllerBase
 
         if (question == null)
         {
-            return NotFound($"Question with Id = {id} not found");
+            return NotFound($"Question with Id = {id} and QuestionPointId = {fid} not found");
         }
         return Ok(question);
     }
