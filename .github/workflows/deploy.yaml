@@ -17,6 +17,6 @@ jobs:
         service_account_email: github@bcsfocus.iam.gserviceaccount.com
         service_account_key: ${{ secrets.GCP_SA_KEY }}
     - name: Deploy
-      uses: GoogleCloudPlatform/github-actions/deploy-appengine@master
+      uses: GoogleCloudPlatform/github-actions/deploy-appengine@v1
       with:
         version: v1
