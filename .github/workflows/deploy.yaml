@@ -11,12 +11,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Configure gcloud
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@development
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@v1
       with:
         project_id: bcsfocus
         service_account_email: github@bcsfocus.iam.gserviceaccount.com
         service_account_key: ${{ secrets.GCP_SA_KEY }}
     - name: Deploy
-      uses: GoogleCloudPlatform/github-actions/deploy-appengine@development
+      uses: GoogleCloudPlatform/github-actions/deploy-appengine@v1
       with:
         version: v1
